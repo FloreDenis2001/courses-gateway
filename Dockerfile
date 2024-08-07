@@ -13,6 +13,8 @@ EXPOSE 8082
 COPY mvnw .
 COPY .mvn .mvn
 
+# Set executable permissions for the maven wrapper
+RUN chmod +x mvnw
 
 # Copy the pom.xml file to download dependencies
 COPY pom.xml .
