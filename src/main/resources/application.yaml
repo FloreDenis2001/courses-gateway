@@ -13,15 +13,10 @@ spring:
         - id: ui
           uri: http://localhost:3000
           predicates:
-              - Path=/ui/**
+              - Path=/**
           filters:
-            - RewritePath=/ui/(?<segment>.*), /${segment}
-        - id: ui-js-assets
-          uri: http://localhost:3000
-          predicates:
-            - Path=/static/webpack/**
-          filters:
-            - RewritePath=/static/webpack/(?<filename>.*), /static/webpack/${filename}
+            - RewritePath=/(?<segment>.*), /${segment}
+
 
       globalcors:
         corsConfigurations:
