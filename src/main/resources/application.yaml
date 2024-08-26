@@ -10,11 +10,23 @@ spring:
             - Path=/server/**
           filters:
             - RewritePath=/server/(?<segment>.*), /server/api/v1/${segment}
+        - id: ui
+          uri: http://localhost:3000
+          predicates:
+              - Path=/ui/**
+          filters:
+            - RewritePath=/ui/(?<segment>.*), /${segment}
+        - id: ui-js-assets
+          uri: http://localhost:3000
+          predicates:
+            - Path=/static/webpack/**
+          filters:
+            - RewritePath=/static/webpack/(?<filename>.*), /static/webpack/${filename}
 
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowed-origins: "http://localhost:5000"
+            allowed-origins: "http://localhost:8081"
             allowed-methods: "GET, POST, PUT, DELETE, OPTIONS"
             allowed-headers: "Authorization, Content-Type, Accept"
             allow-credentials: true
