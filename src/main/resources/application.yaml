@@ -10,6 +10,14 @@ spring:
             - Path=/server/**
           filters:
             - RewritePath=/server/(?<segment>.*), /server/api/v1/${segment}
+
+        - id: courseservice
+          uri: http://localhost:8082
+          predicates:
+              - Path=/courses/**
+          filters:
+              - RewritePath=/courses/(?<segment>.*), /courses/api/v1/${segment}
+
         - id: ui
           uri: http://localhost:3000
           predicates:
