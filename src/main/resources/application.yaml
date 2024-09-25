@@ -5,7 +5,7 @@ spring:
     gateway:
       routes:
         - id: authservice
-          uri: http://localhost:8080
+          uri: http://localhost:8083
           predicates:
             - Path=/server/**
           filters:
