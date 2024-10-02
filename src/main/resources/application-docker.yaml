@@ -5,7 +5,7 @@ spring:
     gateway:
       routes:
         - id: authservice
-          uri: http://courses-auth-service:8080
+          uri: http://courses-auth-service:8083
           predicates:
             - Path=/server/**
           filters:
@@ -40,12 +40,12 @@ spring:
 server:
   port: 8081
 
-logging:
-  level:
-    org.springframework.web.cors: DEBUG
-    org.springframework.cloud.gateway: DEBUG
-  pattern:
-    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+metrics:
+  distribution:
+    percentiles-histogram:
+      http:
+        server:
+          request: true
 management:
   tracing:
     sampling:
@@ -53,3 +53,11 @@ management:
   zipkin:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
+
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
