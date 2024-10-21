@@ -49,6 +49,11 @@ spring:
 server:
   port: 8081
 
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+
 metrics:
   distribution:
     percentiles-histogram:
@@ -62,13 +67,22 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+    endpoint:
+      prometheus:
+        enabled: true
 
-logging:
-  level:
-    org.springframework.web.cors: DEBUG
-    org.springframework.cloud.gateway: DEBUG
-  pattern:
-    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+  logging:
+    pattern:
+      level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+    level:
+      root: debug
+    file:
+      name: test.log
+
 
 logs:
   destination: localhost:3100

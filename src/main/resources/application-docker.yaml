@@ -19,11 +19,18 @@ spring:
             - RewritePath=/courses/(?<segment>.*), /courses/api/v1/${segment}
 
         - id: ui
-          uri: http://localhost:3000
+          uri: http://client:3000
           predicates:
-            - Path=/**
+            - Path=/ui/**
           filters:
-            - RewritePath=/(?<segment>.*), /${segment}
+            - RewritePath=/ui/(?<segment>.*), /${segment}
+
+        - id: next-assets
+          uri: http://client:3000
+          predicates:
+            - Path=/_next/static/**
+          filters:
+            - RewritePath=/_next/static/(?<filename>.*), /_next/static/${filename}
 
 
       globalcors:
