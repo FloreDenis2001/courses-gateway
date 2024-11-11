@@ -32,6 +32,10 @@ spring:
           filters:
             - RewritePath=/_next/static/(?<filename>.*), /_next/static/${filename}
 
+        - id: media-files-ui
+          uri: http://client:3000
+          predicates:
+              - Path=/assets/**, /images/**, /public/**
 
       globalcors:
         corsConfigurations:
